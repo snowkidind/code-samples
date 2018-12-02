@@ -1,24 +1,29 @@
+/*
+This is a segment from a program I wrote which interacts with openCV in order to detect the 
+position of a laser pointer as it is pointed at a television screen. 
+*/
+
 cv::Mat PointSource::analyzeLines(cv::Mat bw)
 {
 
+    // 
     if (!inited){
-    
         stallTimer += 1;
-        
         if (stallTimer >= stallTimerDuration){
             inited = true;
             stallTimer = 0;
         }
-        
         // stall for a minute before accepting data
         return bw;
     }
     
-    
-    
+    // reallocate the bw array with proper file format
     cv::cvtColor(bw, bw, CV_BGRA2BGR);
+    
+    // save an unmutated copy
     cv::Mat reference = bw.clone();
 
+    // assume any undisclosed variable like this is an instance/class variable set in the header file
     if (init){
         north.setRows(bw.rows);
         south.setRows(bw.rows);
@@ -27,56 +32,30 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
         init = false;
     }
     
-    //
+    // Solution will be our array solution, which will eventually contain 4 lines that 
+    // define the rectangle in the image we are detecting. This code is run perpetually 
+    // so only calculate heavy things as needed 
     if (solution.size() < 4){
+               
+        ////// noise removal tactics //////
         
-        // ditch blue channel altogether
+        // the blue channel does not help us find a red dot so remove.
         Mat channel[3];
         split(bw, channel);
         channel[0] = Mat::zeros(bw.rows, bw.cols, CV_8UC1);
         channel[1] = Mat::zeros(bw.rows, bw.cols, CV_8UC1);
         cv::merge(channel,3, bw);
 
+        // antialias the image
         for ( int i = 1; i < 10; i = i + 2 )
             blur( bw, bw, Size( i, i ), Point(-1,-1));
         
+        // grayscale
         cv::cvtColor(bw, bw, CV_BGR2GRAY);
 
-        // threshold the image
+        // threshold the image (uses GUI sliders)
         threshold( bw, bw, slider1, slider2, CV_THRESH_BINARY_INV);
-        
-        
-        /* strangeness with the contours progz
-        vector<Vec4i> hierarchy;
-        vector<vector<Point> > contours;
-        
-        // CV_CHAIN_APPROX_NONE, CV_CHAIN_APPROX_SIMPLE
-        cv::findContours(bw, contours, hierarchy, CV_RETR_LIST , CV_CHAIN_APPROX_NONE, Point(0, 0) );
-        cv::Mat colormat;
-        
-        for( int i = 0; i< contours.size(); i++ )
-        {
-            Scalar color = Scalar( 127, 254, 85 );
-            
-            cv::cvtColor(bw, colormat, CV_GRAY2BGR);
-            drawContours( colormat, contours, i, color, 2, 8, hierarchy, 0, Point() );
-        }
-        bw = colormat;
-        */
-        
-//        Point seed = Point(bw.cols/2, bw.rows/2); // center point
-//        Scalar color = Scalar(0, 255, 0); // green channel
-//        cv::floodFill(bw, seed, color);
-//        
-//        // seed point
-//        Scalar red = Scalar(0, 0, 255);
-//        cv::circle(bw, seed, 10, red);
-
-        // cv::cvtColor(bw, bw, CV_BGR2GRAY);
     }
-
-    
-    
 
     // canny, edge detection
     // input array - filter Source image, grayscale
@@ -85,19 +64,17 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
     // thresh 2 highThreshold: Set three times the lower threshold (following Canny’s recommendation)
     // apeture size / kernel_size: default 3 (the size of the Sobel kernel to be used internally)
     // l2 gradient (false)
-    
     if (solution.size() < 4){
         cv::Canny(bw, bw, slider3, slider3 * 3, 3);
     }
 
-    
     // define the output vector array of lines
     std::vector<cv::Vec4i> lines;
     std::vector<cv::Vec4i> linesA;
     cv::Size s = bw.size();
     
+    // Hough Lines: Finds line segments in a binary image using the probabilistic Hough transform.
     // detect straight lines in the image, returns lines
-    // input
     // output vector stores the parameters (x_{start}, y_{start}, x_{end}, y_{end}) of the detected lines
     // rho (Distance resolution of the accumulator in pixels.)
     // theta in degrees, 1 Degree (CV_PI/180) Angle resolution of the accumulator in radians
@@ -109,7 +86,7 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
         cv::cvtColor(bw, bw, CV_GRAY2BGR);
     }
 
-    // expand the lines
+    // once lines are found expand them to reach from one side of the view to the other
     for (int i = 0; i < linesA.size(); i++){
         
         // before expanding the lines, we should determine if the line has advanced too far
@@ -121,11 +98,11 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
         float greenRef = intensity.val[1];
         float redRef = intensity.val[2];
         
-        // This approach uses min max values to determine the dimensions of the dsm.
-        // determine the difference between x coordinates of the line - abs returns positive value.
+        // This approach uses min max values to determine the dimensions of the downstage monitor
+        // difference between x coordinates of the line - abs returns positive value.
         int difference = abs(linesA[i][2] - linesA[i][0]);
         
-        // determine the difference between y coordinates of the line
+        // difference between y coordinates of the line
         int difference2 = abs(linesA[i][1] - linesA[i][3]);
         
         int checkRange = 40;
@@ -157,6 +134,7 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                 
                 bool pass = false;
                 
+                // is line west side or east side?
                 if (linesA[i][0] < s.width/2){
                     
                     // west quadrant
@@ -179,24 +157,17 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                     else go = true;
                     
                     if (go){
-                        
                         // vertical lines (subject to greater perspective distortion, wider angles)
                         cv::Vec4i vec = north.expandLine(linesA[i], bw.rows, true);
                         lines.push_back(vec);
                         
-                        // draw circles to verify
+                        // draw circles to verify (visual effect for technician)
                         cv::circle(bw, pointNeg, 10, GREEN);
                         cv::circle(bw, pointPos, 10, BLUE);
                     }
                     else {
-                        //                    cout << "Thou shalt not pass..." << endl;
-                        //                    cout << "Blue: a:" << blueRef << " b: " << innerBlue  << " c: " << outerBlue  << endl;
-                        //                    cout << "Green: a:" << greenRef << " b: " << innerGreen  << " c: " << outerGreen << endl;
-                        //                    cout << "Red: a:" << redRef << " b: " << innerRed  << " c: " << outerRed  << endl;
-                        //                    cout << endl;
                         std::string strN ( std::to_string(pointNeg.x)  + "," + std::to_string(pointNeg.y));
                         std::string strP ( std::to_string(pointPos.x)  + "," + std::to_string(pointPos.y));
-                        
                         cv::circle(bw, pointPos, 10, ORANGE);
                         cv::circle(bw, pointNeg, 10, ORANGE);
                     }
@@ -222,7 +193,6 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                     else go = true;
                     
                     if (go){
-                        
                         // vertical lines (subject to greater perspective distortion, wider angles)
                         cv::Vec4i vec = north.expandLine(linesA[i], bw.rows, true);
                         lines.push_back(vec);
@@ -232,20 +202,8 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                         cv::circle(bw, pointPos, 10, BLUE);
                     }
                     else {
-                        //                    cout << "Thou shalt not pass.. the east that is.." << endl;
-                        //                    cout << "Blue: a:" << blueRef << " b: " << innerBlue  << " c: " << outerBlue  << endl;
-                        //                    cout << "Green: a:" << greenRef << " b: " << innerGreen  << " c: " << outerGreen << endl;
-                        //                    cout << "Red: a:" << redRef << " b: " << innerRed  << " c: " << outerRed  << endl;
-                        //                    cout << endl;
-                        
-                        //                    putText(result, "Differencing the two images.", cvPoint(30,30),
-                        //                            FONT_HERSHEY_COMPLEX_SMALL, 0.8, cvScalar(200,200,250), 1, CV_AA);
                         std::string strN ( std::to_string(pointNeg.x)  + "," + std::to_string(pointNeg.y));
                         std::string strP ( std::to_string(pointPos.x)  + "," + std::to_string(pointPos.y));
-                        
-                        cv::putText(bw, strN, pointNeg, FONT_HERSHEY_SIMPLEX, .5, ORANGE);
-                        cv::putText(bw, strP, pointPos, FONT_HERSHEY_SIMPLEX, .5, RED);
-                        
                         cv::circle(bw, pointPos, 10, ORANGE);
                         cv::circle(bw, pointNeg, 10, ORANGE);
                     }
@@ -302,7 +260,6 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                     else go = true;
                     
                     if (go){
-                        
                         // vertical lines (subject to greater perspective distortion, wider angles)
                         cv::Vec4i vec = north.expandLine(linesA[i], bw.cols, false);
                         lines.push_back(vec);
@@ -312,18 +269,9 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                         cv::circle(bw, pointPos, 10, YELLOW);
                     }
                     else {
-                        
-                        //                    cout << "Thou shalt not pass... In the North" << endl;
-                        //                    cout << "Blue: a:" << blueRef << " b: " << innerBlue  << " c: " << outerBlue  << endl;
-                        //                    cout << "Green: a:" << greenRef << " b: " << innerGreen  << " c: " << outerGreen << endl;
-                        //                    cout << "Red: a:" << redRef << " b: " << innerRed  << " c: " << outerRed  << endl;
-                        //                    cout << endl;
+
                         std::string strN ( std::to_string(pointNeg.x)  + "," + std::to_string(pointNeg.y));
                         std::string strP ( std::to_string(pointPos.x)  + "," + std::to_string(pointPos.y));
-                        
-                        cv::putText(bw, strN, pointNeg, FONT_HERSHEY_SIMPLEX, .5, ORANGE);
-                        cv::putText(bw, strP, pointPos, FONT_HERSHEY_SIMPLEX, .5, ORANGE);
-                        
                         cv::circle(bw, pointPos, 10, ORANGE);
                         cv::circle(bw, pointNeg, 10, ORANGE);
                     }
@@ -349,7 +297,6 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                     else go = true;
                     
                     if (go){
-                        
                         // vertical lines (subject to greater perspective distortion, wider angles)
                         cv::Vec4i vec = north.expandLine(linesA[i], bw.cols, false);
                         lines.push_back(vec);
@@ -359,18 +306,8 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                         cv::circle(bw, pointPos, 10, LIGHT_GREEN);
                     }
                     else {
-                        //
-                        //                    cout << "Thou shalt not pass.. the south that is.." << endl;
-                        //                    cout << "Blue: a:" << blueRef << " b: " << innerBlue  << " c: " << outerBlue  << endl;
-                        //                    cout << "Green: a:" << greenRef << " b: " << innerGreen  << " c: " << outerGreen << endl;
-                        //                    cout << "Red: a:" << redRef << " b: " << innerRed  << " c: " << outerRed  << endl;
-                        //                    cout << endl;
                         std::string strN ( std::to_string(pointNeg.x)  + "," + std::to_string(pointNeg.y));
                         std::string strP ( std::to_string(pointPos.x)  + "," + std::to_string(pointPos.y));
-                        
-                        cv::putText(bw, strN, pointNeg, FONT_HERSHEY_SIMPLEX, .5, ORANGE);
-                        cv::putText(bw, strP, pointPos, FONT_HERSHEY_SIMPLEX, .5, ORANGE);
-                        
                         cv::circle(bw, pointPos, 10, ORANGE);
                         cv::circle(bw, pointNeg, 10, ORANGE);
                     }
@@ -382,14 +319,13 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
             }
         }
     }
-    
-    
-    
-    // Discussion
+
+    // Discussion:
     // This determines where the lines are on the screen.
-    // First we determine which quadrant the line is in, then we average an array associated
-    // with that quadrant to determine the most likely position if the screen's edge...
+    // First we determined which quadrant the line is in, now we average an array associated
+    // with that quadrant to determine the most likely position of the screen's edge...
     // we only run this code if the solution is not completed.
+    
     if (solution.size() < 4){
         
         for (int i = 0; i < lines.size(); i++)
@@ -406,7 +342,6 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
             // since the lines can be several degrees off (loose xdiff ~30, ydiff ~100)
             // the presence of these two factors is required
             // that is, if the xFactor is small and the yFactor is large...
-            // if (difference < xDiff && difference2 > slider5){
             if (difference < difference2){
             
                 // in this case the line gender-identifies as vertical
@@ -466,7 +401,6 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
                     }
                     
                     if(!solvedW){
-                        
                         // expands detected lines
                         cv::Vec4i v = lines[i];
                         v = west.expandLine(v, bw.rows, true);
@@ -538,7 +472,6 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
             }
             
             // if the y coordinates are small and x coordinates are large
-            //else if (difference2 < xDiff && difference > slider5){
             else {
                 // probably horizontal
                 
@@ -705,7 +638,6 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
     // I am guessing yes because the laser will probably be more accurate like that. No citations as of yet.
     if (solution.size() == 4){
         
-        // setWindowProperty("edges", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN ); // switch to full screen mode
         ready = true;
         
         // we can go ahead and detect intersections now...
@@ -748,32 +680,28 @@ cv::Mat PointSource::analyzeLines(cv::Mat bw)
         
         // apply the transform to canvas
         if (corners.size() == 4){
-        
             cv::Mat transmtx = cv::getPerspectiveTransform(corners, quad_pts);
-            cv::warpPerspective(bw, bw, transmtx, bw.size());
-            
+            cv::warpPerspective(bw, bw, transmtx, bw.size());  
         }
         
         // every so often reset the test after displaying the appropriate statistics
         if (summary){
             
             cout << "Calculated in " << restart << " cycles..." << endl;
+
             summary = false;
-            
+
             cout << "Solution: (" << corners[0].x << "," << corners[0].y << ") ("
             << corners[1].x << "," << corners[1].y << ") ("
             << corners[2].x << "," << corners[2].y << ") ("
             << corners[3].x << "," << corners[3].y << ")\n" << endl;
-            
         }
         
         if (restart >= testCyclesLimit){
             restartDetection();
         }
     }
-
+    
     restart += 1;
-
-
     return bw;
 };
