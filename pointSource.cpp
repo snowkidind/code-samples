@@ -1,6 +1,23 @@
 /*
-This is a segment from a program I wrote which interacts with openCV in order to detect the 
-position of a laser pointer as it is pointed at a television screen. 
+
+Project: Point Source, Laser Pointer Detection Tool
+Author: Keny Ruyter, 2016
+
+This project was used for an invention I made related to detecting a laser pointer during 
+public presentations.
+
+This segment is from a program I wrote, which interacts with openCV in order to detect the 
+position of a television screen and create an accurate image from which to do further processing 
+on detecting the laser pointer's position.
+
+in this function, an array of raw data is provided from a camera that is assumed to be 
+pointing at a tv screen. First the edges of the screen are detected, and then from that, 
+corners are detected, then the original image is warped and cropped to the detected dimensions 
+of the television display. 
+
+If you have seen a projector auto detect a screen I would suppose this is similar, but probably 
+an improvement to that, because of the use of data from a charge couple device.
+
 */
 
 cv::Mat PointSource::analyzeLines(cv::Mat bw)
