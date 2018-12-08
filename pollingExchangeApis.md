@@ -102,7 +102,7 @@ Therein, the problem that remains to be solved is a decent way to handle multipl
 
 Now that we have an array of available pairings we can poll the respective exchanges for the appropriate data, again using simple, crude logic, eliminating any use of timers and maximizing response time by using a simple iterator within the original callbacks:
 
-_actual code polls 8 exchanges, most removed for redundancy's sake
+_actual code polls 8 exchanges, most removed for redundancy's sake_
 
 ```javascript
 pollExchangeForPairs: function(availablePairs, callback){
