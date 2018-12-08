@@ -1,4 +1,4 @@
-# Polling Apis for Exchange Data
+# Polling Api's for Exchange Data
 
 When polling cryptocurrency exchanges for latest price information, you have several options towards integrating a trading bot. You can access most exchanges’ REST api, and get relevant last information quite easily, or you can (usually) get a web socket that contains the latest trades in a real time data stream. Further there are some services that poll all the exchanges and give you averaged real time price information or even specific exchange data through their api.
 
