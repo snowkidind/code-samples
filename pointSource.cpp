@@ -1,6 +1,7 @@
 /*
 
 Project: Point Source, Laser Pointer Detection Tool
+Keywords: C++, openCV, Image formats, Prototype Development Process
 Author: Keny Ruyter, 2016
 
 This project was used for an invention I made related to detecting a laser pointer during 
