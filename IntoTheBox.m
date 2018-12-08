@@ -1,3 +1,39 @@
+/*
+
+The reason I included this file to my code example collection is to provide 
+some sort of idea what kind of deep dives I manage to get myself into. 
+
+The thailes app is a very robust extremely debugged and optimized product 
+targeting iOS 8. The app contains several games that act as a sublayer to 
+the educational segments. The app teaches the Thai language, and during the 
+various sections where a number of exercises roll out similar to "Simon Says"
+Some memorization or specialized exercises are included within those exercises 
+alas, "Game within a game".
+
+Into the box is a memorization game where you are given one of the 44 thai 
+consonants and are to drag each letter tile into one of three boxes, which
+represents it's consonant class. It appears many times throughout the game 
+on different levels as the various consonants are introduced to the user. 
+
+I designed the entire Thailes project. It contains thousands of graphics and 
+sounds, and then integrates them into an intuitive and flowing edutainment 
+gameplay that is effective at teaching a student of the language thoroughly
+and efficiently.
+
+The code here is left as-is, untouched from when I made it in 2015. The entire
+scope of the app is very large as it is cumulative of more than a year's work. 
+
+The file here is a small example of the game oriented development I have 
+involved myself in. Factors in play: SpriteKit, Game Design, Texture Management,
+Sound Files, Plist Level Data 
+
+One Caveat regarrding this code: Ultimately, the app was brought to market and 
+is still for sale on the App Store.  It is certainly a work in progress. As an 
+"Indie Developer", sometimes the agenda is to get a product finished and working 
+as fast as possible as was the case here. Please consider that production 
+mentality as you review this code.
+
+*/
 
 //
 //  IntoTheBox.m
@@ -5,9 +41,6 @@
 //
 //  Created by Keny Ruyter on 1/6/15.
 //  Copyright (c) 2015 Art Of Communication, Inc. All rights reserved.
-//
-// Reference Tutorial:
-// http://www.raywenderlich.com/61289/how-to-make-a-line-drawing-game-with-sprite-kit
 
 #import "IntoTheBox.h"
 #import "Tile.h"
@@ -26,7 +59,6 @@ typedef struct _NSZone NSZone;
 {
     NSTimeInterval _lastUpdateTime;
     NSTimeInterval _dt;
-    // NSTimeInterval _currentSpawnTime;
     BOOL messageWasDisplayed;
     BOOL lock;
     int lastCorrectChallenge;
@@ -111,7 +143,6 @@ typedef struct _NSZone NSZone;
     if (!gameTextures){
         gameTextures = textures;
     }
-    // _currentSpawnTime = 5.0;
     
     // what could happen here is before sucking the plist into an ivar, the plist could be parsed into a separate array where repeats could be parsed and then that file added into memory.
     
@@ -166,12 +197,7 @@ typedef struct _NSZone NSZone;
 - (void) beginGame {
     // begin
     [self drawBoxes]; // replace with call for atlases
-    
-    // scoreBoard = [[ScoreBoard alloc] init];
-    // scoreBoard.name = @"scoreBoard";
-    // [self addChild:scoreBoard];
     [scoreBoard showBasic];
-    
     [self spawnTile];
 }
 #pragma mark Gameplay UI / Spawn
@@ -198,9 +224,7 @@ typedef struct _NSZone NSZone;
     
     // so here we check the current entry to see if there is a message to be displayed first before presenting it. Within, we set a BOOL that indicates whether the message was displayed or not.
     if ([challengeData[currentSpawn] objectForKey:@"message"] && !messageWasDisplayed){
-        
         [self waitForChallengesToFinish];
-        
         messageWasDisplayed = YES;
     }
     else {
@@ -208,16 +232,10 @@ typedef struct _NSZone NSZone;
         messageWasDisplayed = NO;
         
         // if messageWasDisplayed the second call will hit the following code, using the unchanged currentSpawn
-        
         if (currentSpawn < [challengeData count] && ![self checkForEndOfGame]){
             
             // no more than 10 nodes on board
             if ([nodes count] < 10){
-                
-//                _currentSpawnTime -= 0.2;
-//                if(_currentSpawnTime < 2) {
-//                    _currentSpawnTime = 2.0;
-//                }
                 
                 CharacterLookup *lookup = [[CharacterLookup alloc]init];
                 lookup.assertChallengeClass = @3;
@@ -291,14 +309,10 @@ typedef struct _NSZone NSZone;
     // Set Gravity in the world
     NSNumber *chall = [NSNumber numberWithFloat:-5];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setGravityY" object:chall];
-    
-    //NSString *edge = @"on";
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"edgeLoop" object:edge];
-    
+
     // loop through the data creating a tile for each challenge
     for (int i = 0; i < [challengeData count] -1; i++) {
-        
-        
+
         NSMutableArray *delayAction = [NSMutableArray array];
         SKAction *durationAction = [SKAction waitForDuration:delay];
         [delayAction addObject:durationAction];
@@ -333,9 +347,7 @@ typedef struct _NSZone NSZone;
             // Place object directly underneath the top edge border.
             // Maybe Design a better tile in animation, maybe a scalein with a pop sound
             tileObject.position = CGPointMake(tileX, [[UIScreen mainScreen] bounds].size.height - 3);
-            
-            // [[SoundManager sharedManager] playMusic:@"gulp.caf" looping:NO fadeIn:NO];
-            
+ 
         }];
         [delayAction addObject:action1];
         SKAction* sequenceAction = [SKAction sequence:delayAction];
@@ -353,10 +365,6 @@ typedef struct _NSZone NSZone;
         // Set Gravity in the world
         NSNumber *chall = [NSNumber numberWithFloat:0];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"setGravityY" object:chall];
-        
-        //NSString *edge = @"off";
-        //[[NSNotificationCenter defaultCenter] postNotificationName:@"edgeLoop" object:edge];
-        
         [self gameAwardFinished];
         
     }];
@@ -398,8 +406,6 @@ typedef struct _NSZone NSZone;
         lineLayer.path = path;
         [self.scene.view.layer addSublayer:lineLayer];
         
-        // path = nil;
-        //CGPathRelease(path); // causes a SA warning, RAY
     }
 }
 
@@ -530,8 +536,7 @@ typedef struct _NSZone NSZone;
                 if ([nodeAtPoint.name isEqual:node.name] && nodeAtPoint.texture.size.width > 0){
                     
                     box = (Box*)[self childNodeWithName:nodeAtPoint.name]; // handle on box
-                    
-                    
+
                     tile.isScheduled = YES;
                     
                     // here we know that the user messed up but we wont tell them
