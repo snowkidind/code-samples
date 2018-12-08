@@ -18,6 +18,8 @@ of the television display.
 If you have seen a projector auto detect a screen I would suppose this is similar, but probably 
 an improvement to that, because of the use of data from a charge couple device.
 
+The code is prototypical in nature and is not intended for encapsulated operation nor intended
+for multiple use cases.
 */
 
 cv::Mat PointSource::analyzeLines(cv::Mat bw)
