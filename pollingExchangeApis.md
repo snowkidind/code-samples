@@ -154,9 +154,29 @@ pollExchangeForPairs: function(availablePairs, callback){
     },
 ```
 
+Inside those calls to the respective exchanges is where we find various approaches to parsing unstandardized api data. Here's what I do for Bittrex:
 
+```javascript
+    // using npm node.bittrex.api
+    const bittrexApi = require('node.bittrex.api');
+    queryBittrex: function(string, callback){
+        const parsed = self.toBtx(string);
+        bittrexApi.getticker({market: parsed}, function (tick, err) {
+            if (err){
+                callback(err.message);
+            } else {
+                ticker = tick.result;
+                callback({
+                    exchange: "Bittrex",
+                    bid: ticker.Bid.toFixed(8),
+                    ask: ticker.Ask.toFixed(8),
+                    last: ticker.Last.toFixed(8)
+                });
+            }
+        });
+    },
 
-
+```
 
 
 
