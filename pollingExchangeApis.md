@@ -10,12 +10,147 @@ If you are making orders of any size on non-liquid tokens another consideration 
 
 In snowbot’s case graphics are generated from data across many exchanges so the cryptocompare api is a reasonably good fit. (I would eventually have to pay for that service should it scale up)
 
-Additionally, Snowbot has a feature that displays the spread of the order book, which allows its users to determine liquidity of a token at the moment. In this case, it has to be exchange specific, so the application polls some selected exchanges to process that data. Therein, the problem that remains to be solved is a decent way to handle multiple simultaneous api requests in node. 
+Additionally, however, Snowbot has a feature that displays the spread of the order book, which allows its users to determine liquidity of a token at the moment. In this case, it has to be exchange specific, so the application polls some selected exchanges to process that data. 
 
-When Snowbot launches, it polls selected exchanges for the latest available exchange pairs. These calls are part of a longer startup process and multiple subsequent promises are just fine for an application where a user is not waiting on a response.
+In order to achieve that, when Snowbot launches, it polls selected exchanges to make a database of the latest available exchange pairs. These calls are part of a longer startup process and multiple subsequent promises are just fine for an application where a user is not waiting on a response.
+
+`
+// Bitfinex, rearrange texts and data handling to meet other exchanges ad nauseum...
+const getBitfinexListings = new Promise(
+    (resolve, reject) => {
+        let url = 'https://api.bitfinex.com/v1/symbols';
+        request.get(
+            url, (error, response, body) => {
+                try {
+                    let dataWrapper = JSON.parse(body);
+                    let data = dataWrapper;
+                    resolve({ exchange: 'bitfinex', data: dataWrapper });
+                } catch (error){
+                    reject(error);
+                }
+            });
+    }
+);
+`
+superceded by...
+`
+getBitfinexListings.then(function(val){
+  let listing = {exchange: 'bitfinex', data: []};
+  for (let i = 0; i < val.data.length; i++){
+    listing.data.push({pair: self.toFormat(val.data[i]), remote: val.data[i]});
+  }
+  listings.push(listing);
+  readyStateBfx = true;
+})
+.catch(
+  // Log the rejection reason
+  (reason) => {
+    // TODO: eventually set a timer and retry
+    console.log('rejected: bitfinex ('+reason+') here.');
+    readyStateBfx = true;
+  });
+getHitBtcListings.then(function(val){ // ...etc
+`
+This gets the exchanges synced up with the program but still there is no way of knowing it's finished. So a recursive timer is integrated to check for completion of the listing pairs operation using simple and crude logic, which will then allow the program to begin serving users:
+
+`
+function getPairs(){
+    if (readyStateBtx && 
+        readyStateBin && 
+        readyStateBfx && 
+        readyStateHitBtc && 
+        readyStateLiq && 
+        readyStateCrypt && 
+        readyStateKucoin && 
+        readyStateIdex){
+        
+        console.log("Listings ready");
+        echoListings();
+        
+        // start candles application
+        candles.startCandles(listings);
+
+    } else {
+        oneMTimer = setTimeout(function(){getPairs()}, 1000);
+    }
+}
+
+`
+
+Therein, the problem that remains to be solved is a decent way to handle multiple simultaneous api requests while maximizing the speed at which these resource calls execute. In Node, your external/filesystem (async or sync) callback options are Promises, Callback hell, or neither, which is my choice. Promises and callbacks are good for when a process requires synchronous api calls, but in this case, parallel api calls would work just fine, and speed up the process exponentially with some simplistic procedural code. First though we must determine which exchanges support the selected token pair:
+
+`
+    findMatchingPairs: function(query){
+        query = String(query);
+        
+            // iterate indexes for matching pair
+            let index = [];
+            for (let i = 0; i < listings.length; i++){
+                for (let j = 0; j < listings[i].data.length; j++){
+                    if (query === listings[i].data[j].pair){
+                        index.push({exchange: listings[i].exchange, data: listings[i].data[j].pair});
+                    }
+                }
+            }
+            return index;
+        }
+    },
+`
+
+Now that we have an array of available pairings we can poll the respective exchanges for the appropriate data, again using simple, crude logic, eliminating any use of timers and maximizing response time by using a simple iterator within the original callbacks:
+
+_actual code polls 8 exchanges, most removed for redundancy's sake
+`
+pollExchangeForPairs: function(availablePairs, callback){
+
+        // here we call the exchanges and return the responses...
+        let bittrex = false;
+        let binance = false;
+        let bitfinex = false;
+
+        let responseData = [];
+
+        let done = 0;
+
+        for (let i = 0; i < availablePairs.length; i++){
+            if (availablePairs[i].exchange === "bittrex"){
+                bittrex = true;
+                done += 1;
+            }
+            else if (availablePairs[i].exchange === "bitfinex"){
+                bitfinex = true;
+                done += 1;
+            }
+            else if (availablePairs[i].exchange === "binance"){
+                binance = true;
+                done += 1;
+            }
+        }
+
+        if (bittrex) {
+            self.queryBittrex(availablePairs[0].data, function (data) {
+                responseData.push(data);
+                done -= 1;
+                if (done === 0)callback (responseData);
+            });
+        }
+        if (bitfinex){
+            self.queryBitfinex(availablePairs[0].data, function(data){
+                responseData.push(data);
+                done -= 1;
+                if (done === 0)callback (responseData);
+            });}
+        if (binance) {
+            self.queryBinance(availablePairs[0].data, function (data) {
+                responseData.push(data);
+                done -= 1;
+                if (done === 0)callback (responseData);
+            });
+        }
+    },
+`
 
 
-In Node, your options are Promises, Callback hell, or neither, which is my choice. Promises and callbacks are good for when a process requires synchronous api calls, but in this case, parallel api calls would work just fine, and speed up the process exponentially with some simplistic procedural code:
 
 
 
