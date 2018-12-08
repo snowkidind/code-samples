@@ -5,7 +5,7 @@ Keywords: C++, openCV, Image formats, Prototype Development Process
 Author: Keny Ruyter, 2016
 
 This project was used for an invention I made related to detecting a laser pointer during 
-public presentations.
+public presentations. here is a demo of the semi-working prototype: https://youtu.be/Mz0ApU56E9I
 
 This segment is from a program I wrote, which interacts with openCV in order to detect the 
 position of a television screen and create an accurate image from which to do further processing 
