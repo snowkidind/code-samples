@@ -31,8 +31,11 @@ const getBitfinexListings = new Promise(
             });
     }
 );
+
 `
+
 superceded by...
+
 `
 getBitfinexListings.then(function(val){
   let listing = {exchange: 'bitfinex', data: []};
@@ -54,6 +57,7 @@ getHitBtcListings.then(function(val){ // ...etc
 This gets the exchanges synced up with the program but still there is no way of knowing it's finished. So a recursive timer is integrated to check for completion of the listing pairs operation using simple and crude logic, which will then allow the program to begin serving users:
 
 `
+
 function getPairs(){
     if (readyStateBtx && 
         readyStateBin && 
@@ -80,6 +84,7 @@ function getPairs(){
 Therein, the problem that remains to be solved is a decent way to handle multiple simultaneous api requests while maximizing the speed at which these resource calls execute. In Node, your external/filesystem (async or sync) callback options are Promises, Callback hell, or neither, which is my choice. Promises and callbacks are good for when a process requires synchronous api calls, but in this case, parallel api calls would work just fine, and speed up the process exponentially with some simplistic procedural code. First though we must determine which exchanges support the selected token pair:
 
 `
+
     findMatchingPairs: function(query){
         query = String(query);
         
@@ -100,6 +105,7 @@ Therein, the problem that remains to be solved is a decent way to handle multipl
 Now that we have an array of available pairings we can poll the respective exchanges for the appropriate data, again using simple, crude logic, eliminating any use of timers and maximizing response time by using a simple iterator within the original callbacks:
 
 _actual code polls 8 exchanges, most removed for redundancy's sake
+
 `
 pollExchangeForPairs: function(availablePairs, callback){
 
