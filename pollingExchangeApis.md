@@ -33,8 +33,7 @@ const getBitfinexListings = new Promise(
 );
 
 ```
-
-superceded by...
+followed by...
 
 ```javascript
 getBitfinexListings.then(function(val){
