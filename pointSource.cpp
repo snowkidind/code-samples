@@ -26,7 +26,7 @@ for multiple use cases.
 cv::Mat PointSource::analyzeLines(cv::Mat bw)
 {
 
-    // 
+    // resolve some not ready glitches, en masse
     if (!inited){
         stallTimer += 1;
         if (stallTimer >= stallTimerDuration){
