@@ -90,6 +90,8 @@ Here is a summary of most of the larger projects I have spent a fair amount of t
 - Tech: LAMP Stack
 - Description: Web development for several websites for clients.
 
+# Work Experience and Resume Material
+
 Here's a nifty timeline that shows what I have been doing over the years:
 ![timeline](/resources/timeline.png)
 
