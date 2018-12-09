@@ -11,7 +11,7 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 ## Here's a brief description of the samples provided:
 
 <dl>
-  <dt>**pollingExchangeApis.md**</dt>
+  <dt><b>pollingExchangeApis.md</b></dt>
   <dd>Tech: Node.js</dd>
   <dd>Subject: Accessing and Optimizing Api data calls.</dd>
   <dd>[View Example](./pollingExchangeApis.md)</dd>
