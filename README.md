@@ -36,6 +36,23 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 - Example: [KRGameScroll.swift](./KRGameScroll.swift)
 - Original Repository: https://github.com/snowkidind/KRGameScrollSwift
 
+# Technical Documents
+
+Over the years I have also done an amount of research and as a result I have made some interesting Technical Documents that range from Patent applications, to Whitepapers. Here are some selections that are of interest:
+
+Note: Details to come...
+
+#### Whitepaper for Art Licensing Token (In Progress)
+
+#### Whitepaper for cryptocurrency payment routing wrapper (In Progress)
+
+#### EMA Wedge Analysis Method
+
+#### Binocular Vision Therapy Apparatus
+
+#### Method for learning a foriegn language
+
+
 # Background and Experience
 
 ### Projects
