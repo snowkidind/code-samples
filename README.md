@@ -16,8 +16,8 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 
 #### Understanding Game Engines / Sprite management for canvas. 
 - Tech: JavaScript, Canvas
-- Original Repository: https://github.com/snowkidind/KRGameLoop
 - Example: [KRGameLoop.js](./KRGameLoop.js)
+- Original Repository: https://github.com/snowkidind/KRGameLoop
 
 #### Front end / Web Application Startup and Routing in PHP. 
 - Tech: PHP, Bootstrap, AWS, Ubuntu (LAMP)
@@ -33,5 +33,5 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 
 #### Native iOS 2D Game Format / Front end for SpriteKit games
 - Tech: Swift
-- Original Repository: https://github.com/snowkidind/KRGameScrollSwift
 - Example: [KRGameScroll.swift](./KRGameScroll.swift)
+- Original Repository: https://github.com/snowkidind/KRGameScrollSwift
