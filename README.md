@@ -35,3 +35,9 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 - Tech: Swift
 - Example: [KRGameScroll.swift](./KRGameScroll.swift)
 - Original Repository: https://github.com/snowkidind/KRGameScrollSwift
+
+# Background and Experience
+Here's a nifty timeline that shows what I have been doing over the years:
+
+![timeline](/resources/timeline.png)
+
