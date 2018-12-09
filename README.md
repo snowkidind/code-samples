@@ -39,9 +39,54 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 # Background and Experience
 
 ### Projects
+
+#### Snowbot, theOG.io
+- Tech: Node.js, aws, Ubuntu
+- Description: Chatroom bot interface that charts cryptocurrency assets and provides several other services
+
+#### BinTrade
+- Tech: Node.js, Terminal, macOS
+- Description: Automatic swing trading application for trading assets on Binance exchange
+
+#### Thailes, 1.0, 2.0
+- Tech: Objective C, iOS, SpriteKit, LAMP backend
+- Description: Innovative iPhone educational game, teaches Thai Language
+
+#### Japanese Tiles
+- Tech: Objective C, iOS, SpriteKit, LAMP backend
+- Description: Innovative iPhone educational game, teaches Japanese Language
+
+#### Floating Market
+- Tech: Objective-C, iOS, CoreData, Cocos 2d
+- Description: Innovative iPhone educational game, teaches Thai Language
+
+#### Crew Works
+- Tech: FileMaker Pro
+- Description: Operations software for a contractor booking and management company.
+
+#### KinvatJobs.com
+- Tech: LAMP + aws
+- Description: Contractor registration and questionnaire; website and database.
+
+#### Fitzway Car Clinics
+- Tech: LAMP Stack
+- Description: Operations software for an automotive repair facility.
+
+#### World Wide Beer Pong
+- Tech: C#, .net
+- Description: Contract to develop a hardware controller for an online beer pong game.
+
+#### Snowkid Industries
+- Tech: Electronics, TTL, PIC Microcontrollers, C, Assembly Language
+- Description: Electronics development for animated LED characters and digital signage.
+
 #### MVHS: Riverweb, Montgomery County Public Schools NSF
 - Tech: PERL / CGI 
 - Description: Web interface for the world's first online educational facility. (Literally)
+
+#### Graphicage
+- Tech: LAMP Stack
+- Description: Web development for several websites for clients.
 
 Here's a nifty timeline that shows what I have been doing over the years:
 ![timeline](/resources/timeline.png)
