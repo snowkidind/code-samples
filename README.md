@@ -147,4 +147,4 @@ and physical hindrances.
 
 #### Web Developer, independent, September 1998 – July 2000
 - Worked as a contractor to implement Riverweb®, an NSF funded project that simulates a watershed, in a web based learning environment.
-- Linux/T erminal, CGI, PERL, JavaScript, HTML.
+- Linux/Terminal, CGI, PERL, JavaScript, HTML.
