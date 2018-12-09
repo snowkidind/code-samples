@@ -40,6 +40,8 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 
 ### Projects
 
+Here is a summary of most of the larger projects I have spent a fair amount of time developing. For various reasons I am not publishing code samples of many of these projects. Feel free to ask me about my experiences with any of them! [keny@eastcoastbands.com](mailto:keny@eastcoastbands.com)
+
 #### Snowbot, theOG.io
 - Tech: Node.js, aws, Ubuntu
 - Description: Chatroom bot interface that charts cryptocurrency assets and provides several other services
