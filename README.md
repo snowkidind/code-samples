@@ -8,12 +8,14 @@ Outside of coding, I have many other skills related to managing projects like th
 
 Enjoy the samples. There is a brief overview of what each one does at the beginning of the respective files.
 
-Here's a brief description of the samples provided:
+## Here's a brief description of the samples provided:
 
-**pollingExchangeApis.md**
-Tech: Node.js
-Subject: Accessing and Optimizing Api data calls.
-[View Example](./pollingExchangeApis.md)
+<dl>
+  <dt>**pollingExchangeApis.md**</dt>
+  <dd>Tech: Node.js</dd>
+  <dd>Subject: Accessing and Optimizing Api data calls.</dd>
+  <dd>[View Example](./pollingExchangeApis.md)</dd>
+</dl>
 
 **KRGameLoop.js**
 Tech: JavaScript, Canvas
