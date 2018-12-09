@@ -10,11 +10,10 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 
 ## Here's a brief description of the samples provided:
 
-**pollingExchangeApis.md**
-Tech: Node.js 
-Subject: Accessing and Optimizing Api data calls. 
-[View Example](./pollingExchangeApis.md) 
+**Accessing and Optimizing Api data calls. **
 
+⋅⋅* Tech: _Node.js_  
+⋅⋅* Example: [pollingExchangeApis.md](./pollingExchangeApis.md) 
 
 **KRGameLoop.js**
 Tech: JavaScript, Canvas
