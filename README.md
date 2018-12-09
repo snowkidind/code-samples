@@ -10,33 +10,28 @@ Enjoy the samples. There is a brief overview of what each one does at the beginn
 
 ## Here's a brief description of the samples provided:
 
-** Accessing and Optimizing Api data calls. **
+#### Accessing and Optimizing Api data calls. 
 - Tech: _Node.js_  
 - Example: [pollingExchangeApis.md](./pollingExchangeApis.md) 
 
-** KRGameLoop.js **
+#### Understanding Game Engines / Sprite management for canvas. 
 - Tech: JavaScript, Canvas
-- Subject: Understanding Game Engines / Basic sprite management for canvas. 
 - Original Repository: https://github.com/snowkidind/KRGameLoop
 - Example: [KRGameLoop.js](./KRGameLoop.js)
 
-** index.php **
+#### Front end / Web Application Startup and Routing in PHP. 
 - Tech: PHP, Bootstrap, AWS, Ubuntu (LAMP)
-- Subject: Front end / Web Application Startup and Routing in PHP. 
 - Example: [index.php](./index.php)
 
-** pointSource.cpp **
+#### Processing Image data with openCV
 - Tech: C++, openCV
-- Subject: Processing Images with openCV
 - Example: [pointSource.cpp](./pointSource.cpp)
 
-** IntoTheBox.m **
-- Tech: Objective-C
-- Subject: iOS development in Objective C, Published Game
+#### iOS development in Objective C, Published Game
+- Tech: Objective-C, iOS
 - Example: [IntoTheBox.m](./IntoTheBox.m)
 
-** KRGameScroll.swift **
+#### Native iOS 2D Game Format / Front end for SpriteKit games
 - Tech: Swift
-- Subject: Native iOS 2D Game Format for easy front end for SpriteKit games
 - Original Repository: https://github.com/snowkidind/KRGameScrollSwift
 - Example: [KRGameScroll.swift](./KRGameScroll.swift)
