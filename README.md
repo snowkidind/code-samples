@@ -95,3 +95,56 @@ Here is a summary of most of the larger projects I have spent a fair amount of t
 Here's a nifty timeline that shows what I have been doing over the years:
 ![timeline](/resources/timeline.png)
 
+
+#### Danny’s Fitzway Car Clinic, Keny Ruyter, 2014 - Present
+- Enterprise Software Development Contract
+- Collaborated with employees to design and develop a custom solution for their needs.
+- Rapid Development and Deployment environment.
+- Integrated Documentation and Project Management Software, for great detail and organization.
+- (LAMP) Linux, Apache, MySQL, PHP, JavaScript, AJAX. Cross Platform, Mobile.
+- Development Server, Git VCS, Production Server.
+
+#### Founder, Art Of Communication Inc., October 2012 – Present
+- Founded this educational software company.
+- Directly managed a staff of 15 comprising programmers, graphic artists and content providers.
+- Developed marketing and monetization strategies to establish brand name and revenue streams.
+- Brought three new products to market and developing new products for the iOS platform.
+- Objective C, Cocoa Touch, game engines, git, SQLite, PHP, XML, JavaScript, CSS, HTML 5.
+- StoreKit, Cocos2d, SpriteKit, A VT oolkit, CoreData, Object Oriented Design, MVC.
+- Created many graphics using Illustrator and Photoshop, applying exact precision.
+- Manages a Ubuntu development server, and offsite production and archival servers.
+
+#### Founder, East Coast Bands Recording Studio, October 2003 – Present
+- Founded this recording studio business, as the lead engineer and producer.
+- Managed projects by hiring studio talent and booking sessions to fulfill project goals.
+- Focus on finishing client projects within budget constraints, exceeding professional standards.
+- Recorded hundreds of demos and around 80 full-length production releases.
+- Designed configured, and built four professional grade recording studio locations.
+- Managed the storage and archiving of all client projects.
+
+#### Contractor, KR Audio, January 2010 – present
+- Independent contractor for corporate audio/video events at DC venues.
+- Sets up, configures, and runs audio and video systems in corporate settings as A1. (audio lead)
+- Required to learn complex systems on the fly, with time sensitive expectations, under high
+exposure and broadcast environment pressure.
+- Yamaha, DigiCo, Soundcraft Brand Consoles, D&B, JBL line array configuration and acoustic
+modeling software. Smaart sound analysis software. Trained on digital consoles by Yamaha.
+- Management of technicians during various productions, assigning crews of up to 45 people.
+       
+#### Music Educator, Victor Litz Music, January 1998 – October 2003
+- Taught more than 2,000 percussion students the foundations of Music.
+- Developed one on one instructional methods, allowing students to overcome psychological blocks
+and physical hindrances.
+
+#### Web Design Contractor, independent, October 2000 – October 2004
+- Provided web consultation, design and hosting for several small businesses.
+- PHP, PERL, HTML, Computer Graphics
+
+#### Pre Press Production, Gazette Newspapers, July 2000 – January 2001
+- Produced graphics at this newspaper company.
+- Worked in electronic pre-press, film, and stripping departments.
+- Photoshop, Quark Xpress, image scanners.
+
+#### Web Developer, independent, September 1998 – July 2000
+- Worked as a contractor to implement Riverweb®, an NSF funded project that simulates a watershed, in a web based learning environment.
+- Linux/T erminal, CGI, PERL, JavaScript, HTML.
