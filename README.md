@@ -8,7 +8,7 @@ Outside of coding, I have many other skills related to managing projects like th
 
 Enjoy the samples. There is a brief overview of what each one does at the beginning of the respective files.
 
-## Here's a brief description of the samples provided:
+## Code Samples:
 
 #### Accessing and Optimizing Api data calls. 
 - Tech: _Node.js_  
