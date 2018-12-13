@@ -52,7 +52,8 @@ Note: Details to come...
 [Patent](./resources/Binocuylarv1.0.pdf)
 [Figures](./resources/04-Figures.pdf)
 
-#### Method for learning a foriegn language
+#### Interactive Method and Game For Learning Characters and Spelling of a Foreign Language
+
 [Patent](http://www.patentsencyclopedia.com/app/20150179085)
 
 
