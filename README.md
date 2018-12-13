@@ -49,8 +49,11 @@ Note: Details to come...
 #### EMA Wedge Analysis Method
 
 #### Binocular Vision Therapy Apparatus
+[Patent](./resources/Binocuylarv1.0.pdf)
+[Figures](./resources/04-Figures.pdf)
 
 #### Method for learning a foriegn language
+[Patent](http://www.patentsencyclopedia.com/app/20150179085)
 
 
 # Background and Experience
