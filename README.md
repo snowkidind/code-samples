@@ -42,11 +42,11 @@ Over the years I have also done an amount of research and as a result I have mad
 
 Note: Details to come...
 
-#### Whitepaper for Art Licensing Token (In Progress)
-
 #### Whitepaper for cryptocurrency payment routing wrapper (In Progress)
+Ask For recent version
 
 #### EMA Wedge Analysis Method
+Confidential
 
 #### Binocular Vision Therapy Apparatus
 [Patent](./resources/Binocuylarv1.0.pdf)
