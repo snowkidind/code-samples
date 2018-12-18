@@ -116,6 +116,20 @@ Here is a summary of most of the larger projects I have spent a fair amount of t
 Here's a nifty timeline that shows what I have been doing over the years:
 ![timeline](/resources/timeline.png)
 
+#### theOG, Snowkid, 2017 - Present
+- Cryptocurrency related project centering around Omise Go and other blockchain tech projects.
+- Created private communication channel with 160 users and 410,000 messages since conception. 
+- Developed cryptocurrency analysis method and software used for making trading decisions
+- Copious research in the blockchain space in order to conceptualize future personal direction in the space. 
+- OMG network community moderator and early member of OMG Network community.
+- Amazon Web Services, Node.js, Slack, Gitter, Github
+
+#### Kinvat, Keny Ruyter, 2016 - Present
+- Enterprise Software Development Contract
+- Collaborated with owner to design and develop a custom solution for their contractor database needs.
+- Rapid Development and Deployment environment.
+- Amazon Web Services, (LAMP) Linux, Apache, MySQL, PHP, JavaScript, AJAX. Cross Platform, Mobile.
+- Development Server, Git VCS, Production Server.
 
 #### Danny’s Fitzway Car Clinic, Keny Ruyter, 2014 - Present
 - Enterprise Software Development Contract
