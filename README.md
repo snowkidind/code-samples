@@ -125,17 +125,17 @@ Here's a nifty timeline that shows what I have been doing over the years:
 - Amazon Web Services, Node.js, Slack, Gitter, Github
 
 #### Kinvat, Keny Ruyter, 2016 - Present
-- Enterprise Software Development Contract
+- Enterprise software development contract
 - Collaborated with owner to design and develop a custom solution for their contractor database needs.
-- Rapid Development and Deployment environment.
+- Rapid development and deployment environment.
 - Amazon Web Services, (LAMP) Linux, Apache, MySQL, PHP, JavaScript, AJAX. Cross Platform, Mobile.
 - Development Server, Git VCS, Production Server.
 
 #### Danny’s Fitzway Car Clinic, Keny Ruyter, 2014 - Present
-- Enterprise Software Development Contract
-- Collaborated with employees to design and develop a custom solution for their needs.
-- Rapid Development and Deployment environment.
-- Integrated Documentation and Project Management Software, for great detail and organization.
+- Enterprise software development contract
+- Collaborated with employees to design and develop a custom solution for their operations software needs.
+- Rapid development and deployment environment.
+- Integrated documentation and project management software, for great detail and organization.
 - (LAMP) Linux, Apache, MySQL, PHP, JavaScript, AJAX. Cross Platform, Mobile.
 - Development Server, Git VCS, Production Server.
 
@@ -147,7 +147,7 @@ Here's a nifty timeline that shows what I have been doing over the years:
 - Objective C, Cocoa Touch, game engines, git, SQLite, PHP, XML, JavaScript, CSS, HTML 5.
 - StoreKit, Cocos2d, SpriteKit, A VT oolkit, CoreData, Object Oriented Design, MVC.
 - Created many graphics using Illustrator and Photoshop, applying exact precision.
-- Manages a Ubuntu development server, and offsite production and archival servers.
+- Manages an Ubuntu development server, and offsite production and archival servers.
 
 #### Founder, East Coast Bands Recording Studio, October 2003 – Present
 - Founded this recording studio business, as the lead engineer and producer.
