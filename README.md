@@ -119,7 +119,7 @@ Here's a nifty timeline that shows what I have been doing over the years:
 #### theOG, Snowkid, 2017 - Present
 - Cryptocurrency related project centering around Omise Go and other blockchain tech projects.
 - Created private communication channel with 160 users and 410,000 messages since conception. 
-- Developed cryptocurrency analysis method and software used for making trading decisions
+- Developed analysis method and built software used for making trading decisions in channel.
 - Copious research in the blockchain space in order to conceptualize future personal direction in the space. 
 - OMG network community moderator and early member of OMG Network community.
 - Amazon Web Services, Node.js, Slack, Gitter, Github
