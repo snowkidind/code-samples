@@ -1,5 +1,7 @@
 # Polling Api's for Exchange Data
 
+# note: this is obseleted with Node.js 8's async/await functions...
+
 When polling cryptocurrency exchanges for latest price information, you have several options towards integrating a trading bot. You can access most exchanges’ REST api, and get relevant last information quite easily, or you can (usually) get a web socket that contains the latest trades in a real time data stream. Further, there are some services that poll all the exchanges and give you averaged, real time price information or even specific exchange data through their api.
 
 The decision to use any of these methods is all about the application. If you are running an app which makes live trades on a specific exchange you are going to want to get as close to that data as possible, so the websocket or rest api from the exchange in question would most likely be recommended. Else, perhaps you want access to as many exchanges as possible, (As is the case with Snowbot) and you want the user to be able to select where he wants his data to come from. 
